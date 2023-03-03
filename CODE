@@ -1,0 +1,17 @@
+function fetchBarometer(apiKey, location) {
+  const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+  
+  return fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => data.current.pressure_mb)
+    .catch(error => {
+      console.error('Error fetching barometer:', error);
+      return null;
+    });
+}
+This function takes two parameters: an API key for the weather API, and a location string (e.g. "New York, NY"). It constructs the URL for the API call and uses the Fetch API to make the request. When the response is received, it extracts the current barometer reading (in millibars) from the JSON data and returns it. If an error occurs during the fetch or parsing of the response, the function logs an error and returns null.
+
+To use this function, you would call it with your own API key and the desired location:
+fetchBarometer('your-api-key', 'New York, NY')
+  .then(barometer => console.log('Current barometer:', barometer))
+  .catch(error => console.error('Error fetching barometer:', error));
